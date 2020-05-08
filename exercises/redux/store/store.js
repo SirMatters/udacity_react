@@ -25,14 +25,47 @@ function createStore(reducer) {
 }
 
 // App code
+const ADD_TODO = 'ADD_TODO';
+const REMOVE_TODO = 'REMOVE_TODO';
+const TOGGLE_TODO = 'TOGGLE_TODO';
+
+const ADD_GOAL = 'ADD_GOAL';
+const REMOVE_GOAL = 'REMOVE_GOAL';
+
+// action creators
+const addTodoAction = (todo) => ({
+  type: ADD_TODO,
+  todo,
+});
+
+const removeTodoAction = (id) => ({
+  type: REMOVE_TODO,
+  id,
+});
+
+const toggleTodoAction = (id) => ({
+  type: REMOVE_TODO,
+  id,
+});
+
+const addGoal = (goal) => ({
+  type: ADD_GOAL,
+  goal,
+});
+
+const removeGoal = (id) => ({
+  type: REMOVE_GOAL,
+  id,
+});
+
 // reducer function
 function todos(state = [], action) {
   switch (action.type) {
-    case 'ADD_TODO':
+    case ADD_TODO:
       return [...state, action.todo];
-    case 'REMOVE_TODO':
+    case REMOVE_TODO:
       return state.filter((t) => t.id !== action.todo.id);
-    case 'TOGGLE_TODO':
+    case TOGGLE_TODO:
       return state.map((t) =>
         t.id !== action.todo.id ? todo : { ...t, complete: !t.complete }
       );
@@ -43,9 +76,9 @@ function todos(state = [], action) {
 
 function goals(state = [], action) {
   switch (action.type) {
-    case 'ADD_GOAL':
+    case ADD_GOAL:
       return [...state, action.goal];
-    case 'REMOVE_GOAL':
+    case REMOVE_GOAL:
       return state.filter((g) => g.id !== action.goal.id);
     default:
       return state;
@@ -63,24 +96,4 @@ const store = createStore(app);
 
 store.subscribe(() => {
   console.log(`The new state is ${JSON.stringify(store.getState())}`);
-});
-
-store.dispatch({
-  type: 'ADD_TODO',
-  todo: { id: 0, name: 'todo1', complete: false },
-});
-
-store.dispatch({
-  type: 'ADD_TODO',
-  todo: { id: 1, name: 'todo2', complete: false },
-});
-
-store.dispatch({
-  type: 'REMOVE_TODO',
-  todo: { id: 0 },
-});
-
-store.dispatch({
-  type: 'TOGGLE_TODO',
-  todo: { id: 1 },
 });
