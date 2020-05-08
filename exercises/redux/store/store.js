@@ -41,6 +41,17 @@ function todos(state = [], action) {
   }
 }
 
+function goals(state = [], action) {
+  switch (action.type) {
+    case 'ADD_GOAL':
+      return [...state, action.goal];
+    case 'REMOVE_GOAL':
+      return state.filter((g) => g.id !== action.goal.id);
+    default:
+      return state;
+  }
+}
+
 const store = createStore(todos);
 store.subscribe(() => {
   console.log(`The new state is ${JSON.stringify(store.getState())}`);
