@@ -52,7 +52,15 @@ function goals(state = [], action) {
   }
 }
 
-const store = createStore(todos);
+function app(state = {}, action) {
+  return {
+    todos: todos(state.todos, action),
+    goals: goals(state.goals, action),
+  };
+}
+
+const store = createStore(app);
+
 store.subscribe(() => {
   console.log(`The new state is ${JSON.stringify(store.getState())}`);
 });
