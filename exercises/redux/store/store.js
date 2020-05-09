@@ -44,7 +44,7 @@ const removeTodoAction = (id) => ({
 });
 
 const toggleTodoAction = (id) => ({
-  type: REMOVE_TODO,
+  type: TOGGLE_TODO,
   id,
 });
 
@@ -64,10 +64,10 @@ function todos(state = [], action) {
     case ADD_TODO:
       return [...state, action.todo];
     case REMOVE_TODO:
-      return state.filter((t) => t.id !== action.todo.id);
+      return state.filter((t) => t.id !== action.id);
     case TOGGLE_TODO:
       return state.map((t) =>
-        t.id !== action.todo.id ? todo : { ...t, complete: !t.complete }
+        t.id !== action.id ? todo : { ...t, complete: !t.complete }
       );
     default:
       return state;
@@ -79,7 +79,7 @@ function goals(state = [], action) {
     case ADD_GOAL:
       return [...state, action.goal];
     case REMOVE_GOAL:
-      return state.filter((g) => g.id !== action.goal.id);
+      return state.filter((g) => g.id !== action.id);
     default:
       return state;
   }
@@ -127,13 +127,42 @@ function addGoal() {
   store.dispatch(addGoalAction({ id: generateId(), name }));
 }
 
+function toggleTodo(e) {
+  const todoId = e.target.id.split('-')[2];
+  store.dispatch(toggleTodoAction(todoId));
+}
+
+function removeTodo(e) {
+  const todoId = e.target.id.split('-')[2];
+  store.dispatch(removeTodoAction(todoId));
+}
+
 document.getElementById('todoBtn').addEventListener('click', addTodo);
 document.getElementById('goalBtn').addEventListener('click', addGoal);
 
 function addTodoToDOM(todo) {
   const node = document.createElement('li');
   const text = document.createTextNode(todo.name);
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.id = `cb-todo-${todo.id}`;
+  checkbox.onclick = toggleTodo;
+
+  const deleteButton = document.createElement('span');
+  deleteButton.id = `rm-todo-${todo.id}`;
+  deleteButton.innerText = ' X';
+  deleteButton.style.color = 'red';
+  deleteButton.addEventListener('click', removeTodo);
+
+  node.appendChild(checkbox);
   node.appendChild(text);
+  node.appendChild(deleteButton);
+
+  if (todo.complete) {
+    node.style.textDecoration = 'line-through';
+    checkbox.checked = 'true';
+  }
 
   document.getElementById('todos').appendChild(node);
 }
@@ -145,3 +174,6 @@ function addGoalToDom(goal) {
 
   document.getElementById('goals').appendChild(node);
 }
+
+// TODO: Add toggle function with strikethough
+// TODO: Add remove function
