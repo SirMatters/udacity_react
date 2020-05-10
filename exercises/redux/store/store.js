@@ -57,6 +57,22 @@ const logger = (store) => (next) => (action) => {
   return result;
 };
 
+const remindOnNewTodo = (store) => (next) => (action) => {
+  if (action.type === ADD_TODO) {
+    alert(`Dont forget to ${action.todo.name}`);
+  }
+
+  return next(action);
+};
+
+const cheerUpOnGoal = (store) => (next) => (action) => {
+  if (action.type === ADD_GOAL) {
+    alert("That's a great goal!");
+  }
+
+  return next(action);
+};
+
 function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
@@ -88,7 +104,7 @@ const store = Redux.createStore(
     todos,
     goals,
   }),
-  Redux.applyMiddleware(checker, logger)
+  Redux.applyMiddleware(checker, logger, cheerUpOnGoal, remindOnNewTodo)
 );
 
 store.subscribe(() => {
