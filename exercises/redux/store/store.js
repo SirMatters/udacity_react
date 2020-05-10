@@ -104,7 +104,7 @@ const store = Redux.createStore(
     todos,
     goals,
   }),
-  Redux.applyMiddleware(checker, logger, cheerUpOnGoal, remindOnNewTodo)
+  Redux.applyMiddleware(checker, logger, cheerUpOnGoal)
 );
 
 store.subscribe(() => {
