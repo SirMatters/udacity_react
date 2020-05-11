@@ -81,6 +81,8 @@ const cheerUpOnGoal = (store) => (next) => (action) => {
   return next(action);
 };
 
+// REDUCERS
+
 function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
@@ -111,10 +113,20 @@ function goals(state = [], action) {
   }
 }
 
+function loading(state = true, action) {
+  switch (action.type) {
+    case RECEIVE_DATA:
+      return false;
+    default:
+      return state;
+  }
+}
+
 const store = Redux.createStore(
   Redux.combineReducers({
     todos,
     goals,
+    loading,
   }),
   Redux.applyMiddleware(checker, logger, cheerUpOnGoal)
 );
