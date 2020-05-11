@@ -19,20 +19,31 @@ const List = (props) => (
 class Todos extends React.Component {
   removeItem = (item) => {
     this.props.store.dispatch(removeTodoAction(item.id));
+    return API.deleteTodo(item.id).catch(() => {
+      this.props.store.dispatch(addTodoAction(item));
+      alert('An error occured. Try again');
+    });
   };
 
-  toggleTodo = (item) => {
+  toggleItem = (item) => {
     this.props.store.dispatch(toggleTodoAction(item.id));
+    return API.saveTodoToggle(item.id).catch(() => {
+      this.props.store.dispatch(toggleTodoAction(item.id));
+      alert('Sth went wrong. Please, try again later');
+    });
   };
 
   addItem = (e) => {
     e.preventDefault();
-    const name = this.input.value;
-    this.input.value = '';
 
-    this.props.store.dispatch(
-      addTodoAction({ id: generateId(), name, complete: false })
-    );
+    return API.saveTodo(this.input.value)
+      .then((todo) => {
+        this.props.store.dispatch(addTodoAction(todo));
+        this.input.value = '';
+      })
+      .catch(() => {
+        alert('There was an error. Try again');
+      });
   };
 
   render() {
@@ -42,7 +53,7 @@ class Todos extends React.Component {
         <input type='text' ref={(input) => (this.input = input)} />
         <button onClick={this.addItem}>Add todo</button>
         <List
-          toggle={this.toggleTodo}
+          toggle={this.toggleItem}
           remove={this.removeItem}
           items={this.props.todos}
         />
@@ -53,14 +64,23 @@ class Todos extends React.Component {
 class Goals extends React.Component {
   removeItem = (item) => {
     this.props.store.dispatch(removeGoalAction(item.id));
+    return API.deleteGoal(item.id).catch(() => {
+      this.props.store.dispatch(addGoalAction(item));
+      alert('Error. Please try again');
+    });
   };
 
   addItem = (e) => {
     e.preventDefault();
-    const name = this.input.value;
-    this.input.value = '';
 
-    this.props.store.dispatch(addGoalAction({ id: generateId(), name }));
+    return API.saveGoal(this.input.value)
+      .then((item) => {
+        this.store.dispatch(addGoalAction(item));
+        this.input.value = '';
+      })
+      .catch(() => {
+        alert('Sorry, there was an error. Try again');
+      });
   };
   render() {
     return (
