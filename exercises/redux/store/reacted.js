@@ -1,3 +1,5 @@
+// TODO: add goals remove
+
 const List = (props) => (
   <ul>
     {props.items.map((i) => (
@@ -49,6 +51,10 @@ class Todos extends React.Component {
   }
 }
 class Goals extends React.Component {
+  removeItem = (item) => {
+    this.props.store.dispatch(removeGoalAction(item.id));
+  };
+
   addItem = (e) => {
     e.preventDefault();
     const name = this.input.value;
@@ -62,7 +68,7 @@ class Goals extends React.Component {
         <h1>Goals to achieve</h1>
         <input type='text' ref={(input) => (this.input = input)} />
         <button onClick={this.addItem}>Add Goal</button>
-        <List items={this.props.goals} />
+        <List items={this.props.goals} remove={this.removeItem} />
       </div>
     );
   }
@@ -73,6 +79,10 @@ class App extends React.Component {
     const { store } = this.props;
 
     store.subscribe(() => this.forceUpdate());
+
+    Promise.all([API.fetchTodos(), API.fetchGoals()]).then(([todos, goals]) => {
+      store.dispatch(recieveDataAction(todos, goals));
+    });
   }
 
   render() {

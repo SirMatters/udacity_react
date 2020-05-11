@@ -6,6 +6,8 @@ const TOGGLE_TODO = 'TOGGLE_TODO';
 const ADD_GOAL = 'ADD_GOAL';
 const REMOVE_GOAL = 'REMOVE_GOAL';
 
+const RECEIVE_DATA = 'RECEIVE_DATA';
+
 // action creators
 const addTodoAction = (todo) => ({
   type: ADD_TODO,
@@ -30,6 +32,12 @@ const addGoalAction = (goal) => ({
 const removeGoalAction = (id) => ({
   type: REMOVE_GOAL,
   id,
+});
+
+const recieveDataAction = (todos, goals) => ({
+  type: RECEIVE_DATA,
+  todos,
+  goals,
 });
 
 // reducer function
@@ -83,6 +91,8 @@ function todos(state = [], action) {
       return state.map((t) => {
         return t.id !== action.id ? t : { ...t, complete: !t.complete };
       });
+    case RECEIVE_DATA:
+      return action.todos;
     default:
       return state;
   }
@@ -94,6 +104,8 @@ function goals(state = [], action) {
       return [...state, action.goal];
     case REMOVE_GOAL:
       return state.filter((g) => g.id !== action.id);
+    case RECEIVE_DATA:
+      return action.goals;
     default:
       return state;
   }
