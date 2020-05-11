@@ -77,9 +77,7 @@ class App extends React.Component {
 
     store.subscribe(() => this.forceUpdate());
 
-    Promise.all([API.fetchTodos(), API.fetchGoals()]).then(([todos, goals]) => {
-      store.dispatch(recieveDataAction(todos, goals));
-    });
+    this.props.store.dispatch(handleRecieveData());
   }
 
   render() {
