@@ -53,6 +53,51 @@ function handleDeleteTodo(todo) {
   };
 }
 
+function handleToggleTodo(todo) {
+  return (dispatch) => {
+    dispatch(toggleTodoAction(todo.id));
+    return API.saveTodoToggle(todo.id).catch(() => {
+      dispatch(toggleTodoAction(todo.id));
+      alert('Sth went wrong. Please, try again later');
+    });
+  };
+}
+
+function handleAddTodo(name, cb) {
+  return (dispatch) => {
+    API.saveTodo(name)
+      .then((todo) => {
+        dispatch(addTodoAction(todo));
+        cb();
+      })
+      .catch(() => {
+        alert('There was an error. Try again');
+      });
+  };
+}
+
+function handleDeleteGoal(goal) {
+  return (dispatch) => {
+    dispatch(removeGoalAction(goal.id));
+    return API.deleteGoal(goal.id).catch(() => {
+      dispatch(addGoalAction(goal));
+      alert('Error. Please try again');
+    });
+  };
+}
+
+function handleAddGoal(name, cb) {
+  return (dispatch) => {
+    API.saveGoal(name)
+      .then((goal) => {
+        dispatch(addGoalAction(goal));
+        cb();
+      })
+      .catch(() => {
+        alert('Sth went wrong. Try again later');
+      });
+  };
+}
 //
 // MIDDLEWARE
 //
