@@ -40,7 +40,22 @@ const recieveDataAction = (todos, goals) => ({
   goals,
 });
 
-// reducer function
+//ASYNC action creators
+
+function handleDeleteTodo(todo) {
+  return (dispatch) => {
+    dispatch(removeTodoAction(todo.id));
+
+    return API.deleteTodo(todo.id).catch(() => {
+      dispatch(addTodoAction(todo));
+      alert('An error occured. Try again');
+    });
+  };
+}
+
+//
+// MIDDLEWARE
+//
 
 const checker = (store) => (next) => (action) => {
   if (
@@ -81,7 +96,16 @@ const cheerUpOnGoal = (store) => (next) => (action) => {
   return next(action);
 };
 
+const thunk = (store) => (next) => (action) => {
+  if (typeof action === 'function') {
+    return action(store.dispatch);
+  }
+  return next(action);
+};
+
+//
 // REDUCERS
+//
 
 function todos(state = [], action) {
   switch (action.type) {
@@ -128,7 +152,7 @@ const store = Redux.createStore(
     goals,
     loading,
   }),
-  Redux.applyMiddleware(checker, logger, cheerUpOnGoal)
+  Redux.applyMiddleware(thunk, checker, logger)
 );
 
 store.subscribe(() => {

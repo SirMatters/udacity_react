@@ -17,12 +17,8 @@ const List = (props) => (
 );
 
 class Todos extends React.Component {
-  removeItem = (item) => {
-    this.props.store.dispatch(removeTodoAction(item.id));
-    return API.deleteTodo(item.id).catch(() => {
-      this.props.store.dispatch(addTodoAction(item));
-      alert('An error occured. Try again');
-    });
+  removeItem = (todo) => {
+    this.props.store.dispatch(handleDeleteTodo(todo));
   };
 
   toggleItem = (item) => {
