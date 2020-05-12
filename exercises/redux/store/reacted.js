@@ -71,6 +71,26 @@ class Goals extends React.Component {
   }
 }
 
+const Context = React.createContext();
+
+class Provider extends React.Component {
+  render() {
+    return (
+      <Context.Provider value={this.props.store}>
+        {this.props.children}
+      </Context.Provider>
+    );
+  }
+}
+
+class ConnectedApp extends React.Component {
+  render() {
+    return (
+      <Context.Consumer>{(store) => <App store={store} />}</Context.Consumer>
+    );
+  }
+}
+
 class App extends React.Component {
   componentDidMount() {
     const { store } = this.props;
@@ -97,4 +117,9 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App store={store} />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedApp />
+  </Provider>,
+  document.getElementById('app')
+);
