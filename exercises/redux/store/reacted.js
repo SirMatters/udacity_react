@@ -16,18 +16,22 @@ const List = (props) => (
   </ul>
 );
 
-class ConnectedTodos extends React.Component {
-  render() {
-    return (
-      <Context.Consumer>
-        {(store) => {
-          const { todos } = store.getState();
-          return <Todos todos={todos} dispatch={store.dispatch} />;
-        }}
-      </Context.Consumer>
-    );
-  }
-}
+// class ConnectedTodos extends React.Component {
+//   render() {
+//     return (
+//       <Context.Consumer>
+//         {(store) => {
+//           const { todos } = store.getState();
+//           return <Todos todos={todos} dispatch={store.dispatch} />;
+//         }}
+//       </Context.Consumer>
+//     );
+//   }
+// }
+
+const ConnectedTodos = connect((state) => ({
+  todos: state.todos,
+}))(Todos);
 
 class Todos extends React.Component {
   removeItem = (todo) => {
@@ -61,18 +65,22 @@ class Todos extends React.Component {
   }
 }
 
-class ConnectedGoals extends React.Component {
-  render() {
-    return (
-      <Context.Consumer>
-        {(store) => {
-          const { goals } = store.getState();
-          return <Goals goals={goals} dispatch={store.dispatch} />;
-        }}
-      </Context.Consumer>
-    );
-  }
-}
+// class ConnectedGoals extends React.Component {
+//   render() {
+//     return (
+//       <Context.Consumer>
+//         {(store) => {
+//           const { goals } = store.getState();
+//           return <Goals goals={goals} dispatch={store.dispatch} />;
+//         }}
+//       </Context.Consumer>
+//     );
+//   }
+// }
+
+const ConnectedGoals = connect((state) => {
+  goals: state.goals;
+})(Goals);
 class Goals extends React.Component {
   removeItem = (goal) => {
     this.props.dispatch(handleDeleteGoal(goal));
@@ -109,13 +117,17 @@ class Provider extends React.Component {
   }
 }
 
-class ConnectedApp extends React.Component {
-  render() {
-    return (
-      <Context.Consumer>{(store) => <App store={store} />}</Context.Consumer>
-    );
-  }
-}
+// class ConnectedApp extends React.Component {
+//   render() {
+//     return (
+//       <Context.Consumer>{(store) => <App store={store} />}</Context.Consumer>
+//     );
+//   }
+// }
+
+const ConnectedApp = connect((state) => ({
+  loading: state.loading,
+}))(App);
 
 class App extends React.Component {
   componentDidMount() {
