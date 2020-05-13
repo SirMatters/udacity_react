@@ -131,18 +131,12 @@ const ConnectedApp = connect((state) => ({
 
 class App extends React.Component {
   componentDidMount() {
-    const { store } = this.props;
-
-    store.subscribe(() => this.forceUpdate());
-
-    this.props.store.dispatch(handleRecieveData());
+    const { dispatch } = this.props;
+    dispatch(handleRecieveData());
   }
 
   render() {
-    const { store } = this.props;
-    const { loading } = store.getState();
-
-    if (loading) {
+    if (this.props.loading) {
       return <h1>Loading</h1>;
     }
 
