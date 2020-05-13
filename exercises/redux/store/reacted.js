@@ -16,18 +16,31 @@ const List = (props) => (
   </ul>
 );
 
+class ConnectedTodos extends React.Component {
+  render() {
+    return (
+      <Context.Consumer>
+        {(store) => {
+          const { todos } = store.getState();
+          return <Todos todos={todos} dispatch={store.dispatch} />;
+        }}
+      </Context.Consumer>
+    );
+  }
+}
+
 class Todos extends React.Component {
   removeItem = (todo) => {
-    this.props.store.dispatch(handleDeleteTodo(todo));
+    this.props.dispatch(handleDeleteTodo(todo));
   };
 
   toggleItem = (todo) => {
-    this.props.store.dispatch(handleToggleTodo(todo));
+    this.props.dispatch(handleToggleTodo(todo));
   };
 
   addItem = (e) => {
     e.preventDefault();
-    this.props.store.dispatch(
+    this.props.dispatch(
       handleAddTodo(this.input.value, () => (this.input.value = ''))
     );
   };
@@ -102,7 +115,7 @@ class App extends React.Component {
 
   render() {
     const { store } = this.props;
-    const { todos, goals, loading } = store.getState();
+    const { goals, loading } = store.getState();
 
     if (loading) {
       return <h1>Loading</h1>;
@@ -110,7 +123,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Todos store={store} todos={todos} />
+        <ConnectedTodos />
         <Goals store={store} goals={goals} />
       </div>
     );
