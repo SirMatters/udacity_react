@@ -60,14 +60,27 @@ class Todos extends React.Component {
     );
   }
 }
+
+class ConnectedGoals extends React.Component {
+  render() {
+    return (
+      <Context.Consumer>
+        {(store) => {
+          const { goals } = store.getState();
+          return <Goals goals={goals} dispatch={store.dispatch} />;
+        }}
+      </Context.Consumer>
+    );
+  }
+}
 class Goals extends React.Component {
   removeItem = (goal) => {
-    this.props.store.dispatch(handleDeleteGoal(goal));
+    this.props.dispatch(handleDeleteGoal(goal));
   };
 
   addItem = (e) => {
     e.preventDefault();
-    this.props.store.dispatch(
+    this.props.dispatch(
       handleAddGoal(this.input.value, () => (this.input.value = ''))
     );
   };
@@ -115,7 +128,7 @@ class App extends React.Component {
 
   render() {
     const { store } = this.props;
-    const { goals, loading } = store.getState();
+    const { loading } = store.getState();
 
     if (loading) {
       return <h1>Loading</h1>;
@@ -124,7 +137,7 @@ class App extends React.Component {
     return (
       <div>
         <ConnectedTodos />
-        <Goals store={store} goals={goals} />
+        <ConnectedGoals />
       </div>
     );
   }
