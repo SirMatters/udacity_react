@@ -130,7 +130,6 @@ const Context = React.createContext();
 class App extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-
     dispatch(handleRecieveData());
   }
 
