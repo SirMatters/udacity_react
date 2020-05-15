@@ -10,8 +10,10 @@ const recieveDataAction = (todos, goals) => ({
 
 export function handleRecieveData() {
   return (dispatch) => {
-    Promise.all([API.fetchTodos(), API.fetchGoals()]).then(([todos, goals]) => {
-      dispatch(recieveDataAction(todos, goals));
-    });
+    return Promise.all([API.fetchTodos(), API.fetchGoals()]).then(
+      ([todos, goals]) => {
+        dispatch(recieveDataAction(todos, goals));
+      }
+    );
   };
 }
