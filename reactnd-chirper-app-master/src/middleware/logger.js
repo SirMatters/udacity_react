@@ -1,4 +1,4 @@
-export default logger = store = next = (action) => {
+const logger = (store) => (next) => (action) => {
   console.group(action.type);
   console.log(`The action: ${action.type}`);
   const nextState = next(action);
@@ -6,3 +6,5 @@ export default logger = store = next = (action) => {
   console.groupEnd();
   return nextState;
 };
+
+export default logger;

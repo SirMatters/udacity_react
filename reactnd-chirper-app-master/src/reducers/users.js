@@ -1,6 +1,6 @@
 import { RECEIVE_USERS } from '../actions/users';
 
-export default tweets = (state = {}, action) => {
+const tweets = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_USERS:
       return { ...state.users, ...action.users };
@@ -8,3 +8,5 @@ export default tweets = (state = {}, action) => {
       return state;
   }
 };
+
+export default tweets;
