@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Tweet from './Tweet';
 
 class Dashboard extends React.Component {
   render() {
@@ -9,7 +10,9 @@ class Dashboard extends React.Component {
         <h3 className='center'>Your timeline</h3>
         <ul className='dashboard-list'>
           {tweetIds.map((t) => (
-            <li key={t}>{`Tweetid: ${t}`}</li>
+            <li key={t}>
+              <Tweet id={t} />
+            </li>
           ))}
         </ul>
       </div>
