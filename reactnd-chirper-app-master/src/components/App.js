@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
 import LoadingBar from 'react-redux-loading';
 import NewTweet from './NewTweet';
+import TweetPage from './TweetPage';
 
 class App extends Component {
   componentDidMount() {
@@ -11,7 +12,15 @@ class App extends Component {
   }
   render() {
     // return <div>{this.props.authedUser ? <Dashboard /> : <LoadingBar />}</div>;
-    return <div>{this.props.authedUser ? <NewTweet /> : <LoadingBar />}</div>;
+    return (
+      <div>
+        {this.props.authedUser ? (
+          <TweetPage match={{ params: { id: '8xf0y6ziyjabvozdd253nd' } }} />
+        ) : (
+          <LoadingBar />
+        )}
+      </div>
+    );
   }
 }
 
