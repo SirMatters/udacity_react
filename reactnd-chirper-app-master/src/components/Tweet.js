@@ -11,9 +11,13 @@ import { handleToggleTweet } from '../actions/tweets';
 class Tweet extends Component {
   handleLike = (e) => {
     e.preventDefault();
-    const { tweet } = this.props;
-    this.props.dispatch(
-      handleToggleTweet(tweet.id, this.props.authedUser, tweet.hasLiked)
+    const { dispatch, tweet, authedUser } = this.props;
+    dispatch(
+      handleToggleTweet({
+        id: tweet.id,
+        authedUser,
+        hasLiked: tweet.hasLiked,
+      })
     );
   };
 

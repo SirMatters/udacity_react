@@ -8,9 +8,9 @@ export const receiveTweets = (tweets) => ({
   tweets,
 });
 
-const toggleTweet = ({ tweetId, authedUser, hasLiked }) => ({
+const toggleTweet = ({ id, authedUser, hasLiked }) => ({
   type: TOGGLE_TWEET,
-  tweetId,
+  id,
   authedUser,
   hasLiked,
 });

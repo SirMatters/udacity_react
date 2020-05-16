@@ -7,11 +7,11 @@ const tweets = (state = {}, action) => {
     case TOGGLE_TWEET:
       return {
         ...state,
-        [action.tweetId]: {
-          ...state[action.tweetId],
+        [action.id]: {
+          ...state[action.id],
           likes: action.hasLiked
-            ? state[action.tweetId].likes.filter((u) => u !== action.authedUser)
-            : [...state[action.tweetId].likes, action.authedUser],
+            ? state[action.id].likes.filter((u) => u !== action.authedUser)
+            : [...state[action.id].likes, action.authedUser],
         },
       };
     default:
