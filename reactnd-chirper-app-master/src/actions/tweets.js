@@ -1,6 +1,7 @@
+import { saveLikeToggle } from '../utils/api';
+
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS';
 export const TOGGLE_TWEET = 'TOGGLE_TWEET';
-import { saveLikeToggle } from '../utils/helpers';
 
 export const receiveTweets = (tweets) => ({
   type: RECEIVE_TWEETS,
