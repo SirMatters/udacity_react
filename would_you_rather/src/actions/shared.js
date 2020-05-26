@@ -1,7 +1,11 @@
-import { getQuestions, addQuestion, answerQuestion } from './questions';
+import {
+  getQuestions,
+  addQuestion,
+  answerQuestion,
+  nullifyAnswer,
+} from './questions';
 import {
   _getUsers,
-  _getQuestions,
   _saveQuestion,
   _getQuestions,
   _saveQuestionAnswer,
@@ -11,9 +15,9 @@ import { getUsers } from './users';
 export const getInitialData = () => {
   return (dispatch) => {
     Promise.all([_getQuestions(), _getUsers()])
-      .then(({ users, questions }) => {
-        dispatch(getQuestions(questions));
-        dispatch(getUsers(users));
+      .then((res) => {
+        dispatch(getQuestions(res[0]));
+        dispatch(getUsers(res[1]));
       })
       .catch((err) => {
         console.error(err);
@@ -24,7 +28,7 @@ export const getInitialData = () => {
 };
 
 export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
-  (dispatch) => {
+  return (dispatch) => {
     _saveQuestion(optionOneText, optionTwoText, author)
       .then((question) => {
         dispatch(addQuestion(question)); // for both users and questions reducers
@@ -45,8 +49,7 @@ export const handleAnswerQuestion = (author, qid, answer) => {
       .then((res) => {})
       .catch((err) => {
         console.error(err);
-        // TODO: take into account null option to nullify answer
-        dispatch(answerQuestion(author, qid, null));
+        dispatch(nullifyAnswer(author, qid));
       });
   };
 };
