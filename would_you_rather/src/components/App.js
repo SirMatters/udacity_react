@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getInitialData } from '../actions/shared';
-import { authenticateUser } from '../actions/authedUser';
+
+import Nav from './Nav';
+import List from './List';
 
 class App extends React.Component {
   componentDidMount() {
-    //FIXME: remove auth from here
-    this.props.dispatch(authenticateUser('placeholder'));
     this.props.dispatch(getInitialData());
   }
 
   render() {
     return (
       <div className='App'>
-        {this.props.authedUser ? this.props.authedUser : 'please, login'}
+        {this.props.authedUser ? (
+          <Fragment>
+            <Nav />
+            <List items={[1, 2]} />
+          </Fragment>
+        ) : (
+          'please, auth'
+        )}
       </div>
     );
   }
 }
-const mapStateToProps = ({ authedUser }) => ({ authedUser });
+const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps)(App);
