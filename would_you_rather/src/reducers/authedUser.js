@@ -5,6 +5,6 @@ export const authedUser = (state = null, action) => {
     case AUTHENTICATE_USER:
       return action.uid;
     default:
-      state;
+      return state;
   }
 };
