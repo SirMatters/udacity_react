@@ -11,6 +11,9 @@ import {
   _saveQuestionAnswer,
 } from '../utils/_DATA';
 import { getUsers } from './users';
+import { authenticateUser } from './authedUser';
+
+const authId = 'sarahedo';
 
 export const getInitialData = () => {
   return (dispatch) => {
@@ -18,6 +21,8 @@ export const getInitialData = () => {
       .then((res) => {
         dispatch(getQuestions(res[0]));
         dispatch(getUsers(res[1]));
+        //FIXME: add dynamic auth
+        dispatch(authenticateUser(authId));
       })
       .catch((err) => {
         console.error(err);
@@ -31,6 +36,7 @@ export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
   return (dispatch) => {
     _saveQuestion(optionOneText, optionTwoText, author)
       .then((question) => {
+        //FIXME: add different actions for users and questions for proper logs
         dispatch(addQuestion(question)); // for both users and questions reducers
       })
       .catch((err) => {

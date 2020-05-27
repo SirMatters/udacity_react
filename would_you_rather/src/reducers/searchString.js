@@ -1,6 +1,6 @@
-import { SEARCH_QUESTIONS } from '../actions/search';
+import { SEARCH_QUESTIONS } from '../actions/searchString';
 
-export const searchString = (state = null, action) => {
+export const searchString = (state = '', action) => {
   switch (action.type) {
     case SEARCH_QUESTIONS:
       return action.searchString;

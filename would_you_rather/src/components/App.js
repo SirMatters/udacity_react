@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getInitialData } from '../actions/shared';
 
 import Nav from './Nav';
-import List from './List';
+import QuestionList from './QuestionList';
 
 class App extends React.Component {
   componentDidMount() {
@@ -13,14 +13,8 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        {this.props.authedUser ? (
-          <Fragment>
-            <Nav />
-            <List items={[1, 2]} />
-          </Fragment>
-        ) : (
-          'please, auth'
-        )}
+        <Nav />
+        <QuestionList />
       </div>
     );
   }
