@@ -4,7 +4,8 @@ import { getInitialData } from '../actions/shared';
 
 import Nav from './Nav';
 import QuestionList from './QuestionList';
-import LeaderBoard from './LeaderBoard';
+import Leaderboard from './Leaderboard';
+import NewQuestion from './NewQuestion';
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,7 +17,8 @@ class App extends React.Component {
       <div className='App'>
         <Nav />
         {/* <QuestionList /> */}
-        <LeaderBoard />
+        {/* <Leaderboard /> */}
+        <NewQuestion />
       </div>
     );
   }
