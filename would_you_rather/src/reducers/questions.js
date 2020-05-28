@@ -18,6 +18,7 @@ export const questions = (state = {}, action) => {
       return {
         ...state,
         [qid]: {
+          ...state[qid],
           [answer]: {
             ...state[qid][answer],
             votes: [...state[qid][answer].votes, author],
@@ -38,6 +39,7 @@ function nullifyAnswer(state, qid, author) {
   return {
     ...state,
     [qid]: {
+      ...state[qid],
       [answeredOption]: {
         ...state[qid][answeredOption],
         votes: [...state[qid][answeredOption].votes].filter(

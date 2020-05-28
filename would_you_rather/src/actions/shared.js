@@ -19,6 +19,7 @@ export const getInitialData = () => {
   return (dispatch) => {
     Promise.all([_getQuestions(), _getUsers()])
       .then((res) => {
+        //FIXME: add different actions for users and questions for proper logs
         dispatch(getQuestions(res[0]));
         dispatch(getUsers(res[1]));
         //FIXME: add dynamic auth
@@ -36,7 +37,6 @@ export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
   return (dispatch) => {
     _saveQuestion(optionOneText, optionTwoText, author)
       .then((question) => {
-        //FIXME: add different actions for users and questions for proper logs
         dispatch(addQuestion(question)); // for both users and questions reducers
       })
       .catch((err) => {
@@ -50,12 +50,11 @@ export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
 
 export const handleAnswerQuestion = (author, qid, answer) => {
   return (dispatch) => {
+    // FIXME: take anser within users into account
     dispatch(answerQuestion(author, qid, answer));
-    _saveQuestionAnswer(author, qid, answer)
-      .then((res) => {})
-      .catch((err) => {
-        console.error(err);
-        dispatch(nullifyAnswer(author, qid));
-      });
+    _saveQuestionAnswer({ authedUser: author, qid, answer }).catch((err) => {
+      console.error(err);
+      dispatch(nullifyAnswer(author, qid));
+    });
   };
 };
