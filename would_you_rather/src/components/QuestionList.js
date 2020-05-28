@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import QuestionItem from './QuestionItem';
+import { searchQuestions } from '../actions/searchString';
 
 class QuestionList extends React.Component {
   // more options could be available later on
@@ -11,10 +12,18 @@ class QuestionList extends React.Component {
     this.setState({ display: option });
   };
 
+  handleSearch = (e) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(searchQuestions(e.target.value));
+  };
+
   render() {
-    const { questions, authedUser } = this.props;
+    const { questions, authedUser, searchString } = this.props;
+
     // check if answered or unanswered questions should be shown
     const shouldContain = this.state.display === 'answered';
+
     // we need full questions info to check if user has answered the question
     const questionIds = Object.keys(questions)
       .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
@@ -38,6 +47,12 @@ class QuestionList extends React.Component {
             <option value='answered'>My answered</option>
             <option value='not-answered'>Not answered</option>
           </select>
+          <input
+            type='text'
+            paceholder='Search Questions'
+            onChange={this.handleSearch}
+            value={searchString}
+          />
         </div>
         <ul className='qustions-display'>
           {questionIds.map((q) => (
@@ -51,7 +66,7 @@ class QuestionList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions, authedUser }) => ({
+const mapStateToProps = ({ questions, authedUser, searchString }) => ({
   questions,
   authedUser,
 });
