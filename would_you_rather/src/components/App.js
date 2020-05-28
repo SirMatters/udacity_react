@@ -19,10 +19,10 @@ class App extends React.Component {
         <Nav />
         {this.props.authedUser ? (
           <div>
-            {/* <QuestionList /> */}
+            <QuestionList />
             {/* <Leaderboard /> */}
             {/* <NewQuestion /> */}
-            <Question qid={'8xf0y6ziyjabvozdd253nd'} />
+            {/* <Question qid={'8xf0y6ziyjabvozdd253nd'} /> */}
           </div>
         ) : null}
       </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { _saveQuestion } from '../utils/_DATA';
 import { handleAddQuestion } from '../actions/shared';
 
 class NewQuestion extends React.Component {
