@@ -5,7 +5,7 @@ import { searchQuestions } from '../actions/searchString';
 
 class QuestionList extends React.Component {
   // more options could be available later on
-  state = { display: 'answered' };
+  state = { display: 'answered', searchString: '' };
 
   handleChange = (e) => {
     const option = e.target.value;
@@ -14,27 +14,28 @@ class QuestionList extends React.Component {
 
   handleSearch = (e) => {
     e.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(searchQuestions(e.target.value));
+    this.setState({ searchString: e.target.value });
   };
 
   render() {
-    const { questions, authedUser, searchString } = this.props;
+    const { questions, authedUser } = this.props;
 
     // check if answered or unanswered questions should be shown
     const shouldContain = this.state.display === 'answered';
 
     // we need full questions info to check if user has answered the question
     const questionIds = Object.keys(questions)
-      .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
-      .filter((q) => {
-        return (
+      .filter(
+        (qid) =>
           [
-            ...questions[q].optionOne.votes,
-            ...questions[q].optionTwo.votes,
-          ].includes(authedUser) === shouldContain
-        );
-      });
+            ...questions[qid].optionOne.votes,
+            ...questions[qid].optionTwo.votes,
+          ].includes(authedUser) === shouldContain &&
+          (
+            questions[qid].optionOne.text + questions[qid].optionTwo.text
+          ).includes(this.state.searchString)
+      )
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
     return (
       <div className='question-list'>
@@ -51,7 +52,7 @@ class QuestionList extends React.Component {
             type='text'
             paceholder='Search Questions'
             onChange={this.handleSearch}
-            value={searchString}
+            value={this.state.searchString}
           />
         </div>
         <ul className='qustions-display'>
