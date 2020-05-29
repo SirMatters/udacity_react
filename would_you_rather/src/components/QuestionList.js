@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import QuestionItem from './QuestionItem';
-import { searchQuestions } from '../actions/searchString';
 
 class QuestionList extends React.Component {
   // more options could be available later on
@@ -67,7 +66,7 @@ class QuestionList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions, authedUser, searchString }) => ({
+const mapStateToProps = ({ questions, authedUser }) => ({
   questions,
   authedUser,
 });
