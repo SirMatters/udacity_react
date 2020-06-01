@@ -11,7 +11,11 @@ class Nav extends React.Component {
           <button className='nav-link'>Leaderboard</button>
         </div>
         <div className='nav-right'>
-          <img className='user-avatar-nav' src={users[authedUser].avatarURL} />
+          <img
+            className='user-avatar-nav'
+            style={{ maxHeight: '50px' }}
+            src={users[authedUser].avatarURL}
+          />
           <div className='user-name-nav'>{authedUser}</div>
         </div>
       </nav>

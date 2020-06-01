@@ -17,9 +17,9 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <Nav />
         {this.props.authedUser ? (
           <div>
+            <Nav />
             {/* <QuestionList /> */}
             {/* <Leaderboard /> */}
             {/* <NewQuestion /> */}
