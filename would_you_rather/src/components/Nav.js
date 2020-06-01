@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 class Nav extends React.Component {
   render() {
     const { users, authedUser } = this.props;
-    const userName = users[authedUser];
     return (
       <nav>
         <div className='nav-left'>
