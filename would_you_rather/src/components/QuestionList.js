@@ -55,9 +55,9 @@ class QuestionList extends React.Component {
           />
         </div>
         <ul className='qustions-display'>
-          {questionIds.map((q) => (
-            <li key={q}>
-              <QuestionItem id={q} />
+          {questionIds.map((qid) => (
+            <li key={qid}>
+              <QuestionItem qid={qid} />
             </li>
           ))}
         </ul>

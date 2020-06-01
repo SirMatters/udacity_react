@@ -31,7 +31,7 @@ class Question extends React.Component {
 }
 
 const mapStateToProps = ({ questions, authedUser }, props) => {
-  const { qid } = props;
+  const { qid } = props.match.params;
   const question = questions[qid];
   return { question, authedUser, qid };
 };

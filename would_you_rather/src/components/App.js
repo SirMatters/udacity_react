@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getInitialData } from '../actions/shared';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Nav from './Nav';
 import QuestionList from './QuestionList';
@@ -16,18 +17,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
-        {this.props.authedUser ? (
-          <div>
-            <Nav />
-            {/* <QuestionList /> */}
-            {/* <Leaderboard /> */}
-            {/* <NewQuestion /> */}
-            {/* <Question qid={'8xf0y6ziyjabvozdd253nd'} /> */}
+      <Router>
+        <div className='app'>
+          {this.props.authedUser ? (
+            <div>
+              <Nav />
+              <Route path='/' exact component={QuestionList} />
+              <Route path='/leaderboard' component={Leaderboard} />
+              <Route path='/new' component={NewQuestion} />
+              <Route path='/questions/:qid' component={Question} />
+              {/* <Question qid={'8xf0y6ziyjabvozdd253nd'} /> */}
+            </div>
+          ) : (
             <Login />
-          </div>
-        ) : null}
-      </div>
+          )}
+        </div>
+      </Router>
     );
   }
 }

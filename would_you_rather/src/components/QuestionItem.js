@@ -1,25 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
 class QuestionItem extends React.Component {
-  onClick = (e, id) => {
-    e.preventDefault();
-    alert(`this is a redirect to /questions/:id - ${id}`);
-  };
-
   render() {
-    const { question, id } = this.props;
+    const { question, qid } = this.props;
     return (
-      <div className='question-item' onClick={(e) => this.onClick(e, id)}>
+      <Link to={`/questions/${qid}`} className='question-item'>
         {JSON.stringify(question)}
-      </div>
+      </Link>
     );
   }
 }
 
-const mapStateToProps = ({ questions }, { id }) => {
-  const question = questions[id];
-  return { question, id };
+const mapStateToProps = ({ questions }, { qid }) => {
+  const question = questions[qid];
+  return { question, qid };
 };
 
-export default connect(mapStateToProps)(QuestionItem);
+export default withRouter(connect(mapStateToProps)(QuestionItem));
