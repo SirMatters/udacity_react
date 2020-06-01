@@ -1,34 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchQuestions } from '../actions/searchString';
 
 class Nav extends React.Component {
-  onChange = (e) => {
-    e.preventDefault();
-    this.props.dispatch(searchQuestions(e.target.value));
-  };
-
   render() {
+    const { users, authedUser } = this.props;
+    const userName = users[authedUser];
     return (
       <nav>
         <div className='nav-left'>
-          <button>Questions</button>
-          <button>Leaderboard</button>
-          {/*FIXME: fix search placeholder*/}
-          <input
-            onChange={this.onChange}
-            placeholder='Search questions'
-          ></input>
+          <button className='nav-link'>Questions</button>
+          <button className='nav-link'>Leaderboard</button>
         </div>
-        <div className='nav-right'>{this.props.authedUser}</div>
+        <div className='nav-right'>
+          <img className='user-avatar-nav' src={users[authedUser].avatarURL} />
+          <div className='user-name-nav'>{authedUser}</div>
+        </div>
       </nav>
     );
   }
 }
 
-const mapStateToProps = ({ authedUser, searchString }) => ({
+const mapStateToProps = ({ authedUser, users }) => ({
   authedUser,
-  searchString,
+  users,
 });
 
 export default connect(mapStateToProps)(Nav);
