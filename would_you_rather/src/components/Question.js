@@ -6,20 +6,16 @@ class Question extends React.Component {
   onClick = (e, qid) => {
     e.preventDefault();
     const { dispatch, authedUser } = this.props;
-    console.log(authedUser, qid, e.target.id);
     dispatch(handleAnswerQuestion(authedUser, qid, e.target.id));
   };
-
   render() {
-    const { question, qid } = this.props;
+    const { question, qid, authedUser } = this.props;
+    const { answers } = authedUser; // provide default value for keys
+
     return (
       <div className='question-display'>
         <h1>Would you rather?</h1>
-        <div
-          id='optionOne'
-          className='question-option'
-          onClick={(e) => this.onClick(e, qid)}
-        >
+        <div id='optionOne' className='' onClick={(e) => this.onClick(e, qid)}>
           {question.optionOne.text}
         </div>
         <div

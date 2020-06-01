@@ -7,6 +7,7 @@ import QuestionList from './QuestionList';
 import Leaderboard from './Leaderboard';
 import NewQuestion from './NewQuestion';
 import Question from './Question';
+import Login from './Login';
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,9 +21,10 @@ class App extends React.Component {
         {this.props.authedUser ? (
           <div>
             {/* <QuestionList /> */}
-            <Leaderboard />
+            {/* <Leaderboard /> */}
             {/* <NewQuestion /> */}
             {/* <Question qid={'8xf0y6ziyjabvozdd253nd'} /> */}
+            <Login />
           </div>
         ) : null}
       </div>
