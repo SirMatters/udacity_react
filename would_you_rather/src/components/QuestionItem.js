@@ -4,18 +4,29 @@ import { Link, withRouter } from 'react-router-dom';
 
 class QuestionItem extends React.Component {
   render() {
-    const { question, qid } = this.props;
+    const { question, qid, author } = this.props;
     return (
-      <Link to={`/questions/${qid}`} className='question-item'>
-        {JSON.stringify(question)}
+      <Link
+        to={`/questions/${qid}`}
+        className='question-item d-flex align-items-center'
+        style={{ maxHeight: '50px' }}
+      >
+        <span className='mb-0 mr-auto'>
+          {question.optionOne.text} or {question.optionTwo.text}
+        </span>
+        <div className='ml-auto'>
+          <span className='user-info'>{question.author}</span>
+          <img className='user-image' src={author.avatarURL} />
+        </div>
       </Link>
     );
   }
 }
 
-const mapStateToProps = ({ questions }, { qid }) => {
+const mapStateToProps = ({ questions, users }, { qid }) => {
   const question = questions[qid];
-  return { question, qid };
+  const author = users[question.author];
+  return { question, qid, author };
 };
 
 export default withRouter(connect(mapStateToProps)(QuestionItem));

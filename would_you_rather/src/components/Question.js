@@ -3,27 +3,66 @@ import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared';
 
 class Question extends React.Component {
+  state = {
+    answer: '',
+  };
+
+  componentDidMount() {
+    const { authedUser } = this.props;
+    const { optionOne, optionTwo } = this.props.question;
+    if (optionOne.votes.includes(authedUser)) {
+      this.setState({ answer: 'optionOne' });
+    }
+    if (optionTwo.votes.includes(authedUser)) {
+      this.setState({ answer: 'optionTwo' });
+    }
+  }
+
   onClick = (e, qid) => {
     e.preventDefault();
     const { dispatch, authedUser } = this.props;
+    //TODO: ask mentor if it is a good practice or should be done as conditional dispatch? If voting is possible not from one component, it could be bad?
     dispatch(handleAnswerQuestion(authedUser, qid, e.target.id));
+    this.setState({ answer: e.target.id });
   };
   render() {
-    const { question, qid, authedUser } = this.props;
-    const { answers } = authedUser; // provide default value for keys
+    const { question, qid } = this.props;
+    const totalAnswers = [
+      ...question.optionOne.votes,
+      ...question.optionTwo.votes,
+    ].length;
+    // TODO: ask mentor is it a good approach to define classes of chosen answer this way?
+
+    let optionOneClass = 'question-option';
+    let optionTwoClass = 'question-option';
+    if (this.state.answer === 'optionOne') {
+      optionOneClass += ' chosen';
+      optionTwoClass += ' dismissed';
+    } else if (this.state.answer === 'optionTwo') {
+      optionTwoClass += ' chosen';
+      optionOneClass += ' dismissed';
+    }
 
     return (
-      <div className='question-display'>
+      <div className='question-display '>
         <h1>Would you rather?</h1>
-        <div id='optionOne' className='' onClick={(e) => this.onClick(e, qid)}>
-          {question.optionOne.text}
-        </div>
-        <div
-          id='optionTwo'
-          className='question-option'
-          onClick={(e) => this.onClick(e, qid)}
-        >
-          {question.optionTwo.text}
+        <div className='option-container'>
+          <button
+            id='optionOne'
+            className={optionOneClass}
+            onClick={(e) => this.onClick(e, qid)}
+            disabled={this.state.answer ? true : false}
+          >
+            {question.optionOne.text}
+          </button>
+          <button
+            id='optionTwo'
+            className={optionTwoClass}
+            onClick={(e) => this.onClick(e, qid)}
+            disabled={this.state.answer ? true : false}
+          >
+            {question.optionTwo.text}
+          </button>
         </div>
       </div>
     );

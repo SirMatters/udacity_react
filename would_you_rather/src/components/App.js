@@ -22,11 +22,12 @@ class App extends React.Component {
           {this.props.authedUser ? (
             <div>
               <Nav />
-              <Route path='/' exact component={QuestionList} />
-              <Route path='/leaderboard' component={Leaderboard} />
-              <Route path='/new' component={NewQuestion} />
-              <Route path='/questions/:qid' component={Question} />
-              {/* <Question qid={'8xf0y6ziyjabvozdd253nd'} /> */}
+              <div className='container'>
+                <Route path='/' exact component={QuestionList} />
+                <Route path='/leaderboard' component={Leaderboard} />
+                <Route path='/new' component={NewQuestion} />
+                <Route path='/questions/:qid' component={Question} />
+              </div>
             </div>
           ) : (
             <Login />

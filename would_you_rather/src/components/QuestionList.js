@@ -38,25 +38,30 @@ class QuestionList extends React.Component {
 
     return (
       <div className='question-list'>
-        <div className='list-controls'>
+        <div className='list-controls input-group mt-4'>
           <select
             name='display-type'
             value={this.state.value}
             onChange={this.handleChange}
+            className='form-control'
           >
             <option value='answered'>My answered</option>
             <option value='not-answered'>Not answered</option>
           </select>
           <input
             type='text'
-            paceholder='Search Questions'
+            placeholder='Search Questions'
             onChange={this.handleSearch}
             value={this.state.searchString}
+            className='form-control w-75'
           />
         </div>
-        <ul className='qustions-display'>
+        <ul className='list-group mt-2'>
           {questionIds.map((qid) => (
-            <li key={qid}>
+            <li
+              className=' list-group-item my-1 list-group-item-light rounded box-shadow'
+              key={qid}
+            >
               <QuestionItem qid={qid} />
             </li>
           ))}
