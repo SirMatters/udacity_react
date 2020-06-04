@@ -15,7 +15,7 @@ class QuestionItem extends React.Component {
           {question.optionOne.text} or {question.optionTwo.text}
         </span>
         <div className='ml-auto'>
-          <span className='user-info'>{question.author}</span>
+          <span className='user-info'>{author.name}</span>
           <img className='user-image' src={author.avatarURL} />
         </div>
       </Link>
