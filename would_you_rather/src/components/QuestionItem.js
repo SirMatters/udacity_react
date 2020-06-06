@@ -9,14 +9,15 @@ class QuestionItem extends React.Component {
       <Link
         to={`/questions/${qid}`}
         className='question-item d-flex align-items-center'
-        style={{ maxHeight: '50px' }}
       >
         <span className='mb-0 mr-auto'>
-          {question.optionOne.text} or {question.optionTwo.text}
+          <span className='option-text-list'>{question.optionOne.text}</span>
+          <span> or </span>
+          <span className='option-text-list'>{question.optionTwo.text}</span>
         </span>
         <div className='ml-auto'>
           <span className='user-info'>{author.name}</span>
-          <img className='user-image' src={author.avatarURL} />
+          <img className='user-avatar' src={author.avatarURL} />
         </div>
       </Link>
     );

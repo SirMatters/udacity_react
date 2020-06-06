@@ -6,20 +6,17 @@ class LeaderBoard extends React.Component {
   render() {
     const { userIds } = this.props;
     return (
-      <div className='leaderboard'>
-        <div className='user-item d-flex justify-content-between align-items-center list-group-item my-1 list-group-item-light rounded'>
-          <span className='user-info'>Avatar</span>
-          <span className='user-info'>Name</span>
-          <span className='user-info'>Id</span>
-          <span className='user-info'>Questions answered</span>
-          <span className='user-info'>Questions asked</span>
+      <div className='leaderboard container '>
+        <div className='row my-1 border border-light rounded table-header'>
+          <span className='col user-info'>Avatar</span>
+          <span className='col user-info'>Name</span>
+          <span className='col user-info'>Id</span>
+          <span className='col user-info'>Questions answered</span>
+          <span className='col user-info'>Questions asked</span>
         </div>
         <ul className='list-group mt-2'>
           {userIds.map((id) => (
-            <li
-              className='list-group-item my-1 list-group-item-light rounded box-shadow'
-              key={id}
-            >
+            <li className='row my-1 border border-light rounded' key={id}>
               <UserItem id={id} />
             </li>
           ))}

@@ -6,10 +6,12 @@ class Nav extends React.Component {
   render() {
     const { users, authedUser } = this.props;
     return (
-      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+      <nav className='navbar navbar-expand-sm navbar-light bg-light'>
         <div className='container'>
           <NavLink className='navbar-brand' to='/'>
-            Q
+            <span className='brand'>
+              <p>Q</p>
+            </span>
           </NavLink>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
@@ -38,12 +40,8 @@ class Nav extends React.Component {
             </li>
           </ul>
           <div className='ml-auto'>
-            <div className='user-name-nav'>{authedUser}</div>
-            <img
-              className='user-avatar-nav'
-              style={{ maxHeight: '50px' }}
-              src={users[authedUser].avatarURL}
-            />
+            <span className='user-name-nav'>{authedUser}</span>
+            <img className='user-avatar' src={users[authedUser].avatarURL} />
           </div>
         </div>
       </nav>

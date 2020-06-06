@@ -26,14 +26,26 @@ class Login extends React.Component {
   render() {
     return (
       <div className='login'>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type='text'
-            value={this.state.uid}
-            placeholder='Enter your id'
-            onChange={this.onChange}
-          />
-          <button>Submit</button>
+        <form
+          className='rounded border border-light col-md-6 text-center pt-3'
+          onSubmit={this.onSubmit}
+        >
+          <div className='text-center mb-4'>
+            <span className='brand'>
+              <p>Q</p>
+            </span>
+            <h1>Would you rather app</h1>
+          </div>
+          <div className='form-group'>
+            <input
+              className='form-control'
+              type='text'
+              value={this.state.uid}
+              placeholder='Enter your id'
+              onChange={this.onChange}
+            />
+          </div>
+          <button class='btn btn-light btn-block'>Submit</button>
         </form>
       </div>
     );

@@ -1,5 +1,7 @@
 :root {
   --option-background-size: 150px;
+  --brand-size: 50px;
+  --brand-radius: 10px;
 }
 
 .user-image {
@@ -72,6 +74,56 @@
 }
 
 .user-info {
-  min-width: 150px;
+  /* min-width: 150px; */
   text-align: center;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login form {
+  max-width: 400px;
+  margin-bottom: 20vh;
+}
+
+.brand {
+  background-color: blueviolet;
+  color: white;
+  min-width: var(--brand-size);
+  min-height: var(--brand-size);
+  width: var(--brand-size);
+  border-radius: var(--brand-radius);
+  margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.brand p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.user-avatar {
+  max-height: 30px;
+  border-radius: 50%;
+  margin: 0 0 0 2rem;
+}
+
+.user-avatar.no-margin {
+  margin: 0 0 0 0;
+}
+
+a,
+a:hover {
+  text-decoration: none !important;
+  color: #6f757d;
+}
+
+.table-header {
+  font-weight: bold;
 }
