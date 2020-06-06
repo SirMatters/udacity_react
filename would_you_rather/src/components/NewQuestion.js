@@ -28,19 +28,33 @@ class NewQuestion extends React.Component {
   render() {
     return (
       <div className='question-new'>
-        <h1> Would you rather?</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            onChange={this.onChange}
-            name='optionOneText'
-            value={this.state.optionOne}
-          />
-          <input
-            onChange={this.onChange}
-            name='optionTwoText'
-            value={this.state.optionTwo}
-          />
-          <button>Submit</button>
+        <h1 className='text-center'> Would you rather?</h1>
+        <form
+          className='col-md-6 mx-auto text-center pt-3'
+          onSubmit={this.onSubmit}
+        >
+          <div className='form-group'>
+            <label for='optionOne'>Option 1</label>
+            <input
+              className='form-control'
+              type='text'
+              onChange={this.onChange}
+              name='optionOneText'
+              id='optionOne'
+              value={this.state.optionOneText}
+            />
+          </div>
+          <div className='form-group'>
+            <label for='optionTwo'>Option 2</label>
+            <input
+              className='form-control'
+              onChange={this.onChange}
+              name='optionTwoText'
+              id='optionTwo'
+              value={this.state.optionTwoText}
+            />
+          </div>
+          <button class='btn btn-primary'>Create new poll</button>
         </form>
       </div>
     );

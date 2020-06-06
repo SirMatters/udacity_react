@@ -5,16 +5,22 @@ class UserItem extends React.Component {
   render() {
     const { user } = this.props;
     return (
-      <div className='user-item'>
-        <img
-          // FIXME: apply proper styling
-          style={{ maxHeight: '50px' }}
-          src={user.avatarURL}
-        ></img>
-        <span>{user.name}</span>
-        <span>{user.id}</span>
-        <span>{user.answers ? Object.keys(user.answers).length : 0}</span>
-        <span>{user.questions.length}</span>
+      <div className='user-item d-flex justify-content-between align-items-center'>
+        <span className='user-info'>
+          <img
+            // FIXME: apply proper styling
+            style={{ maxHeight: '50px' }}
+            src={user.avatarURL}
+          ></img>
+        </span>
+        <span className='user-info'>{user.name}</span>
+        <span className='user-info'>{user.id}</span>
+        <span className='user-info'>
+          {user.answers ? Object.keys(user.answers).length : 0}
+        </span>
+        <span className='user-info'>
+          {user.questions ? Object.keys(user.questions).length : 0}
+        </span>
       </div>
     );
   }

@@ -59,7 +59,7 @@ class QuestionList extends React.Component {
         <ul className='list-group mt-2'>
           {questionIds.map((qid) => (
             <li
-              className=' list-group-item my-1 list-group-item-light rounded box-shadow'
+              className='list-group-item my-1 list-group-item-light rounded box-shadow'
               key={qid}
             >
               <QuestionItem qid={qid} />
