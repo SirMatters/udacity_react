@@ -38,13 +38,25 @@ class Login extends React.Component {
             <h1>Would you rather</h1>
           </div>
           <div className='form-group'>
-            <select className='form-control' onChange={this.onChange}>
+            <select
+              value={this.state.uid}
+              className='form-control'
+              onChange={this.onChange}
+            >
+              <option value='' disabled></option>
               {Object.keys(users).map((u) => (
-                <option value={u}>{users[u].name}</option>
+                <option key={u} value={u}>
+                  {users[u].name}
+                </option>
               ))}
             </select>
           </div>
-          <button class='btn btn-light btn-block'>Submit</button>
+          <button
+            disabled={this.state.uid === ''}
+            className='btn btn-light btn-block'
+          >
+            Submit
+          </button>
         </form>
       </div>
     );

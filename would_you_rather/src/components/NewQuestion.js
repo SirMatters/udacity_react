@@ -54,7 +54,12 @@ class NewQuestion extends React.Component {
               value={this.state.optionTwoText}
             />
           </div>
-          <button class='btn btn-primary'>Create new poll</button>
+          <button
+            disabled={Object.values(this.state).some((t) => t === '')}
+            class='btn btn-primary'
+          >
+            Create new poll
+          </button>
         </form>
       </div>
     );

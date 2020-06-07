@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { authenticateUser } from '../actions/authedUser';
 
 class Nav extends React.Component {
   render() {
-    const { users, authedUser } = this.props;
+    const { users, authedUser, dispatch } = this.props;
     return (
       <nav className='navbar navbar-expand-sm navbar-light bg-light'>
         <div className='container'>
@@ -40,12 +41,19 @@ class Nav extends React.Component {
             </li>
           </ul>
           <div className='ml-auto'>
-            <span className='user-name-nav'>{authedUser}</span>
             <img
               alt='avatar'
               className='user-avatar'
               src={users[authedUser].avatarURL}
             />
+            <button
+              className='logout'
+              onClick={() => {
+                dispatch(authenticateUser(''));
+              }}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>

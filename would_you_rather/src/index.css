@@ -127,3 +127,12 @@ a:hover {
 .table-header {
   font-weight: bold;
 }
+
+option[value=''] {
+  display: none !important;
+}
+
+button.logout {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}

@@ -11,9 +11,6 @@ import {
   _saveQuestionAnswer,
 } from '../utils/_DATA';
 import { getUsers } from './users';
-import { authenticateUser } from './authedUser';
-
-const authId = 'sarahedo';
 
 export const getInitialData = () => {
   return (dispatch) => {
@@ -21,7 +18,6 @@ export const getInitialData = () => {
       .then((res) => {
         dispatch(getQuestions(res[0]));
         dispatch(getUsers(res[1]));
-        // dispatch(authenticateUser(authId));
       })
       .catch((err) => {
         console.error(err);
