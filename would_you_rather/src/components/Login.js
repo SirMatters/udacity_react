@@ -34,7 +34,7 @@ class Login extends React.Component {
             <span className='brand'>
               <p>Q</p>
             </span>
-            <h1>Would you rather app</h1>
+            <h1>Would you rather</h1>
           </div>
           <div className='form-group'>
             <input

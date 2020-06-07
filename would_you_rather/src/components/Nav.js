@@ -41,7 +41,11 @@ class Nav extends React.Component {
           </ul>
           <div className='ml-auto'>
             <span className='user-name-nav'>{authedUser}</span>
-            <img className='user-avatar' src={users[authedUser].avatarURL} />
+            <img
+              alt='avatar'
+              className='user-avatar'
+              src={users[authedUser].avatarURL}
+            />
           </div>
         </div>
       </nav>

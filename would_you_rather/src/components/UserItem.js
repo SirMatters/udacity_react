@@ -7,7 +7,11 @@ class UserItem extends React.Component {
     return (
       <Fragment>
         <span className='user-info col'>
-          <img className='user-avatar no-margin' src={user.avatarURL}></img>
+          <img
+            alt='avatar'
+            className='user-avatar no-margin'
+            src={user.avatarURL}
+          ></img>
         </span>
         <span className='user-info col'>{user.name}</span>
         <span className='user-info col'>{user.id}</span>

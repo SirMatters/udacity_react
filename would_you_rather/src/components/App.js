@@ -27,7 +27,7 @@ class App extends React.Component {
                 <Switch>
                   <Route path='/' exact component={QuestionList} />
                   <Route path='/leaderboard' component={Leaderboard} />
-                  <Route path='/new' component={NewQuestion} />
+                  <Route path='/add' component={NewQuestion} />
                   <Route path='/questions/:qid' component={Question} />
                   <Route component={FourORour} />
                 </Switch>

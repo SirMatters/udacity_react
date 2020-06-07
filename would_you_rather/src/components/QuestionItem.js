@@ -17,7 +17,7 @@ class QuestionItem extends React.Component {
         </span>
         <div className='ml-auto'>
           <span className='user-info'>{author.name}</span>
-          <img className='user-avatar' src={author.avatarURL} />
+          <img alt='avatar' className='user-avatar' src={author.avatarURL} />
         </div>
       </Link>
     );

@@ -16,7 +16,7 @@ class LeaderBoard extends React.Component {
         </div>
         <ul className='list-group mt-2'>
           {userIds.map((id) => (
-            <li className='row my-1 border border-light rounded' key={id}>
+            <li className='row py-2 my-1 border border-light rounded' key={id}>
               <UserItem id={id} />
             </li>
           ))}

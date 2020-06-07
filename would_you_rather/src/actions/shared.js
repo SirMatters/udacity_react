@@ -22,6 +22,7 @@ export const getInitialData = () => {
         //FIXME: add different actions for users and questions for proper logs
         dispatch(getQuestions(res[0]));
         dispatch(getUsers(res[1]));
+        dispatch(authenticateUser(authId));
       })
       .catch((err) => {
         console.error(err);

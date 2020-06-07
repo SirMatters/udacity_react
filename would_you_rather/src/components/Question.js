@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared';
+import { roundNumber } from '../utils/utils';
 
 class Question extends React.Component {
   state = {
@@ -67,13 +68,7 @@ class Question extends React.Component {
   };
 
   render() {
-    const { question, qid, isAnswered } = this.props;
-
-    function roundNumber(rnum, rlength) {
-      var newnumber =
-        Math.round(rnum * Math.pow(10, rlength)) / Math.pow(10, rlength);
-      return newnumber;
-    }
+    const { question, qid, isAnswered, author } = this.props;
 
     const totalAnswers = [
       ...question.optionOne.votes,
@@ -92,8 +87,19 @@ class Question extends React.Component {
     // TODO: ask mentor is it a good approach to define classes of chosen answer this way?
 
     return (
-      <div className='question-display '>
+      <div className='question-display d-flex flex-column'>
         <h1>Would you rather?</h1>
+        <div className='author-info ml-auto mr-auto'>
+          <span>by </span>
+          <span className='user-info'>
+            {author.name}
+            <img
+              alt='avatar'
+              className='user-avatar'
+              src={author.avatarURL}
+            ></img>
+          </span>
+        </div>
         <div className='option-container'>
           <div
             className={this.state.optionOne.join(' ')}
@@ -103,7 +109,9 @@ class Question extends React.Component {
           >
             <p>{question.optionOne.text}</p>
             {isAnswered ? (
-              <p className='vote-info'>{optionOneAnswers}%</p>
+              <p className='vote-info'>
+                {question.optionOne.votes.length}({optionOneAnswers}%)
+              </p>
             ) : null}
           </div>
           <div
@@ -114,7 +122,9 @@ class Question extends React.Component {
           >
             <p>{question.optionTwo.text}</p>
             {isAnswered ? (
-              <p className='vote-info'>{optionTwoAnswers}%</p>
+              <p className='vote-info'>
+                {question.optionTwo.votes.length}({optionTwoAnswers}%)
+              </p>
             ) : null}
           </div>
         </div>
@@ -123,16 +133,17 @@ class Question extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions, authedUser }, props) => {
+const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { qid } = props.match.params;
   const question = questions[qid];
+  const author = users[question.author];
   // TODO: ask mentor is it a good approach for oftenly used values - its alike creating container component
   const isAnswered = [
     ...question.optionOne.votes,
     ...question.optionTwo.votes,
   ].includes(authedUser);
 
-  return { question, authedUser, qid, isAnswered };
+  return { question, authedUser, qid, author, isAnswered };
 };
 
 export default connect(mapStateToProps)(Question);
