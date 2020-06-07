@@ -56,7 +56,7 @@ class NewQuestion extends React.Component {
           </div>
           <button
             disabled={Object.values(this.state).some((t) => t === '')}
-            class='btn btn-primary'
+            className='btn btn-primary'
           >
             Create new poll
           </button>
