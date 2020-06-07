@@ -1,4 +1,3 @@
-//FIXME: add users avatar urls
 let users = {
   sarahedo: {
     id: 'sarahedo',

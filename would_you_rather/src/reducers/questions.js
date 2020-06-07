@@ -1,5 +1,5 @@
 import {
-  GET_DATA,
+  GET_QUESTIONS,
   ADD_QUESTION,
   ANSWER_QUESTION,
   NULLIFY_ANSWER,
@@ -7,7 +7,7 @@ import {
 
 export const questions = (state = {}, action) => {
   switch (action.type) {
-    case GET_DATA:
+    case GET_QUESTIONS:
       return { ...state, ...action.questions };
     case ADD_QUESTION:
       const { question } = action;

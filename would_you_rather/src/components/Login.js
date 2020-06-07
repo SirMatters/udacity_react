@@ -24,6 +24,7 @@ class Login extends React.Component {
     }
   };
   render() {
+    const { users = {} } = this.props;
     return (
       <div className='login'>
         <form
@@ -32,18 +33,16 @@ class Login extends React.Component {
         >
           <div className='text-center mb-4'>
             <span className='brand'>
-              <p>Q</p>
+              <p>W</p>
             </span>
             <h1>Would you rather</h1>
           </div>
           <div className='form-group'>
-            <input
-              className='form-control'
-              type='text'
-              value={this.state.uid}
-              placeholder='Enter your id'
-              onChange={this.onChange}
-            />
+            <select className='form-control' onChange={this.onChange}>
+              {Object.keys(users).map((u) => (
+                <option value={u}>{users[u].name}</option>
+              ))}
+            </select>
           </div>
           <button class='btn btn-light btn-block'>Submit</button>
         </form>

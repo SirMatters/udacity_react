@@ -10,7 +10,7 @@ class Nav extends React.Component {
         <div className='container'>
           <NavLink className='navbar-brand' to='/'>
             <span className='brand'>
-              <p>Q</p>
+              <p>W</p>
             </span>
           </NavLink>
           <ul className='navbar-nav mr-auto'>
@@ -34,7 +34,7 @@ class Nav extends React.Component {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink to='/new' activeClassName='active' className='nav-link'>
+              <NavLink to='/add' activeClassName='active' className='nav-link'>
                 New
               </NavLink>
             </li>

@@ -1,10 +1,10 @@
-export const GET_DATA = 'GET_DATA';
+export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const ANSWER_QUESTION = 'ANSWER_QUESTION';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const NULLIFY_ANSWER = 'NULLIFY_ANSWER';
 
 export const getQuestions = (questions) => ({
-  type: GET_DATA,
+  type: GET_QUESTIONS,
   questions,
 });
 

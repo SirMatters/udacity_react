@@ -1,8 +1,8 @@
-import { GET_DATA } from '../actions/users';
+import { GET_USERS } from '../actions/users';
 
 export const users = (state = {}, action) => {
   switch (action.type) {
-    case GET_DATA:
+    case GET_USERS:
       return { ...state, ...action.users };
     default:
       return state;
