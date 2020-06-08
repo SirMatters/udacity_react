@@ -10,10 +10,15 @@ import NewQuestion from './NewQuestion';
 import Question from './Question';
 import Login from './Login';
 import FourORour from './FourOFour';
+import { authenticateUser } from '../actions/authedUser';
 
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(getInitialData());
+    // const authedUser = sessionStorage.getItem('authedUser');
+    // if (authedUser) {
+    //   this.props.dispatch(authenticateUser(authedUser));
+    // }
   }
 
   render() {

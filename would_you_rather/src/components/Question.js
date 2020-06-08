@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared';
 import { roundNumber } from '../utils/utils';
+import { Redirect } from 'react-router-dom';
+import FourOFour from './FourOFour';
 
 class Question extends React.Component {
   state = {
@@ -11,6 +13,8 @@ class Question extends React.Component {
   };
 
   componentDidMount() {
+    console.log('in componentDidMount()');
+
     const { authedUser } = this.props;
     const { optionOne, optionTwo } = this.props.question;
     if ([...optionOne.votes, ...optionTwo.votes].includes(authedUser)) {
@@ -73,14 +77,32 @@ class Question extends React.Component {
   };
 
   render() {
-    const {
-      question,
-      qid,
-      isAnswered,
-      author,
-      optionOneAnswers,
-      optionTwoAnswers,
-    } = this.props;
+    const { question, qid, author, authedUser } = this.props;
+    console.log('in render()', question);
+
+    if (!question) {
+      return <FourOFour />;
+    }
+
+    const isAnswered = [
+      ...question.optionOne.votes,
+      ...question.optionTwo.votes,
+    ].includes(authedUser);
+
+    const totalAnswers = [
+      ...question.optionOne.votes,
+      ...question.optionTwo.votes,
+    ].length;
+    const optionOneAnswers = roundNumber(
+      (question.optionOne.votes.length / totalAnswers) * 100,
+      1
+    );
+
+    const optionTwoAnswers = roundNumber(
+      (question.optionTwo.votes.length / totalAnswers) * 100,
+      1
+    );
+
     /* TODO: ask mentor:
     is it a good approach to define classes within state like it is done in the component so it will be more React-way?
     if so, is the best implementation chosen?
@@ -135,39 +157,20 @@ class Question extends React.Component {
 const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { qid } = props.match.params;
   const question = questions[qid];
-  const author = users[question.author];
+  let author = '';
+  if (question) {
+    author = users[question.author];
+  }
   /*TODO: ask mentor:
   as connect() function basically creates a container component
   is it a good approach to perform value computations within the function
   so the component itself will be more 'display' - like ?
   */
-  const isAnswered = [
-    ...question.optionOne.votes,
-    ...question.optionTwo.votes,
-  ].includes(authedUser);
-
-  const totalAnswers = [
-    ...question.optionOne.votes,
-    ...question.optionTwo.votes,
-  ].length;
-  const optionOneAnswers = roundNumber(
-    (question.optionOne.votes.length / totalAnswers) * 100,
-    1
-  );
-
-  const optionTwoAnswers = roundNumber(
-    (question.optionTwo.votes.length / totalAnswers) * 100,
-    1
-  );
-
   return {
     question,
     authedUser,
     qid,
     author,
-    isAnswered,
-    optionTwoAnswers,
-    optionOneAnswers,
   };
 };
 

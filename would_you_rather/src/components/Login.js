@@ -14,11 +14,12 @@ class Login extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { dispatch, users } = this.props;
-    const uid = this.state.uid;
+    const { uid } = this.state;
     console.log(uid, Object.keys(users));
     if (Object.keys(users).includes(uid)) {
       dispatch(authenticateUser(uid));
       this.setState({ uid: '' });
+      sessionStorage.setItem('authedUser', uid);
     } else {
       alert('No such user, try again');
     }
