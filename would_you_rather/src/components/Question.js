@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared';
 import { roundNumber } from '../utils/utils';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import FourOFour from './FourOFour';
 
 class Question extends React.Component {
@@ -16,18 +16,20 @@ class Question extends React.Component {
     console.log('in componentDidMount()');
 
     const { authedUser } = this.props;
-    const { optionOne, optionTwo } = this.props.question;
-    if ([...optionOne.votes, ...optionTwo.votes].includes(authedUser)) {
-      const [chosenOption, dismissedOption] = optionOne.votes.includes(
-        authedUser
-      )
-        ? ['optionOne', 'optionTwo']
-        : ['optionTwo', 'optionOne'];
-      this.setState((prevState) => ({
-        ...prevState,
-        [chosenOption]: [...prevState[chosenOption], 'chosen'],
-        [dismissedOption]: [...prevState[dismissedOption], 'dismissed'],
-      }));
+    if (this.props.question) {
+      const { optionOne, optionTwo } = this.props.question;
+      if ([...optionOne.votes, ...optionTwo.votes].includes(authedUser)) {
+        const [chosenOption, dismissedOption] = optionOne.votes.includes(
+          authedUser
+        )
+          ? ['optionOne', 'optionTwo']
+          : ['optionTwo', 'optionOne'];
+        this.setState((prevState) => ({
+          ...prevState,
+          [chosenOption]: [...prevState[chosenOption], 'chosen'],
+          [dismissedOption]: [...prevState[dismissedOption], 'dismissed'],
+        }));
+      }
     }
   }
 
@@ -81,7 +83,7 @@ class Question extends React.Component {
     console.log('in render()', question);
 
     if (!question) {
-      return <FourOFour />;
+      return <Redirect to='/not_found' />;
     }
 
     const isAnswered = [
