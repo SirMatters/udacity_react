@@ -34,7 +34,7 @@ class NewQuestion extends React.Component {
           onSubmit={this.onSubmit}
         >
           <div className='form-group'>
-            <label for='optionOne'>Option 1</label>
+            <label htmlFor='optionOne'>Option 1</label>
             <input
               className='form-control'
               type='text'

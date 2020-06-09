@@ -5,7 +5,6 @@ export const users = (state = {}, action) => {
     case GET_USERS:
       return { ...state, ...action.users };
     case TOGGLE_ANSWERED:
-      console.log(action.author, 'answered', action.qid);
       let newState = {
         ...state,
         [action.author]: {
@@ -25,7 +24,6 @@ export const users = (state = {}, action) => {
       } else {
         newQuestions.push(action.qid);
       }
-      console.log(action.author, 'added', action.qid, newQuestions);
 
       return {
         ...state,

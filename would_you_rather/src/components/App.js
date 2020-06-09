@@ -10,7 +10,6 @@ import NewQuestion from './NewQuestion';
 import Question from './Question';
 import Login from './Login';
 import FourORour from './FourOFour';
-import { authenticateUser } from '../actions/authedUser';
 
 class App extends React.Component {
   componentDidMount() {
