@@ -3,6 +3,12 @@
 This is a study project for Udacity React nanodegree program. 
 The app is aimed for users to create and vote polls.
 
+## Installation
+`npm install`
+
+## Launch
+`npm start`
+
 ## Auth
 The app contains preliminary defined set of users which could be used for login.
 App handles auth (frontend), poll creation, poll answering.
