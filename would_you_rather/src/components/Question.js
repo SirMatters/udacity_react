@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared';
 import { roundNumber } from '../utils/utils';
-import { Redirect, useHistory } from 'react-router-dom';
-import FourOFour from './FourOFour';
+import { Redirect } from 'react-router-dom';
 
 class Question extends React.Component {
   state = {
@@ -13,8 +12,6 @@ class Question extends React.Component {
   };
 
   componentDidMount() {
-    console.log('in componentDidMount()');
-
     const { authedUser } = this.props;
     if (this.props.question) {
       const { optionOne, optionTwo } = this.props.question;
@@ -80,7 +77,6 @@ class Question extends React.Component {
 
   render() {
     const { question, qid, author, authedUser } = this.props;
-    console.log('in render()', question);
 
     if (!question) {
       return <Redirect to='/not_found' />;

@@ -15,10 +15,6 @@ import { authenticateUser } from '../actions/authedUser';
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(getInitialData());
-    // const authedUser = sessionStorage.getItem('authedUser');
-    // if (authedUser) {
-    //   this.props.dispatch(authenticateUser(authedUser));
-    // }
   }
 
   render() {

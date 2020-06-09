@@ -10,7 +10,7 @@ import {
   _getQuestions,
   _saveQuestionAnswer,
 } from '../utils/_DATA';
-import { getUsers } from './users';
+import { getUsers, toggleAdded, toggleAnswered } from './users';
 
 export const getInitialData = () => {
   return (dispatch) => {
@@ -31,6 +31,7 @@ export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
     _saveQuestion(optionOneText, optionTwoText, author)
       .then((question) => {
         dispatch(addQuestion(question)); // for both users and questions reducers
+        dispatch(toggleAdded({ author: question.author, qid: question.id }));
       })
       .catch((err) => {
         alert(
@@ -44,9 +45,11 @@ export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
 export const handleAnswerQuestion = (author, qid, answer) => {
   return (dispatch) => {
     dispatch(answerQuestion(author, qid, answer));
+    dispatch(toggleAnswered({ author, qid, answer }));
     _saveQuestionAnswer({ authedUser: author, qid, answer }).catch((err) => {
       console.error(err);
       dispatch(nullifyAnswer(author, qid));
+      dispatch(toggleAnswered({ author, qid, answer }));
     });
   };
 };

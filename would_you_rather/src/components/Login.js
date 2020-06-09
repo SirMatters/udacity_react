@@ -19,7 +19,6 @@ class Login extends React.Component {
     if (Object.keys(users).includes(uid)) {
       dispatch(authenticateUser(uid));
       this.setState({ uid: '' });
-      sessionStorage.setItem('authedUser', uid);
     } else {
       alert('No such user, try again');
     }
