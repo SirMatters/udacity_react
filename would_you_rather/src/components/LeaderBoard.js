@@ -28,15 +28,23 @@ class LeaderBoard extends React.Component {
 
 const mapStateToProps = ({ users }) => {
   return {
-    userIds: Object.keys(users).sort((a, b) => {
-      const answersB = users[b].answers
-        ? Object.keys(users[b].answers).length
-        : 0;
-      const answersA = users[a].answers
-        ? Object.keys(users[a].answers).length
-        : 0;
-      return answersB - answersA;
-    }),
+    userIds: Object.keys(users)
+      .sort((a, b) => {
+        const questionsB =
+          users[b].questions.length > 0 ? users[b].questions.length : 0;
+        const questionsA =
+          users[a].questions.length > 0 ? users[a].questions.length : 0;
+        return questionsB - questionsA;
+      })
+      .sort((a, b) => {
+        const answersB = users[b].answers
+          ? Object.keys(users[b].answers).length
+          : 0;
+        const answersA = users[a].answers
+          ? Object.keys(users[a].answers).length
+          : 0;
+        return answersB - answersA;
+      }),
   };
 };
 

@@ -41,6 +41,7 @@ class Nav extends React.Component {
             </li>
           </ul>
           <div className='ml-auto'>
+            <span>{users[authedUser].name}</span>
             <img
               alt='avatar'
               className='user-avatar'
