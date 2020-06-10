@@ -23,6 +23,7 @@ class NewQuestion extends React.Component {
       handleAddQuestion({ optionOneText, optionTwoText, author: authedUser })
     );
     this.setState({ optionOneText: '', optionTwoText: '' });
+    this.props.history.push('/');
   };
 
   render() {
